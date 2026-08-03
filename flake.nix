@@ -17,7 +17,7 @@
             inherit system;
         };
     in {
-        homeConfigurations.mirzam = home-manager.lib.homeManagerConfiguration {
+        homeConfigurations."mirzam" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
 
             modules = [
