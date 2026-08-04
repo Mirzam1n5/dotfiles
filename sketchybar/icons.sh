@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Workspace Icons (sketchybar app-font)
-SPACE_1=":terminal:"       # 1 - Coding (Ghostty/Terminal)
-SPACE_2=":safari:"         # 2 - Browser
-SPACE_3=":book:"           # 3 - Study
-SPACE_4=":spotify:"        # 4 - Entertainment
-SPACE_5=":gear:"           # 5 - Misc
-SPACE_6=":messages:"       # 6 - Communication
-
 # General Icons
 LOADING=""
 APPLE=""
