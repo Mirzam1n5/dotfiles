@@ -1,28 +1,51 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-PERCENTAGE="$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)"
-CHARGING="$(pmset -g batt | grep 'AC Power')"
+# Source colors for consistent theming
+source "$CONFIG_DIR/colors.sh"
 
-if [ "$PERCENTAGE" = "" ]; then
-  exit 0
+# Get battery information
+BATTERY_INFO=$(pmset -g batt | grep -Eo "[0-9]+%" | cut -d% -f1)
+POWER_SOURCE=$(pmset -g ps | head -1)
+
+# Check if charging
+if [[ $POWER_SOURCE == *"AC Power"* ]]; then
+    CHARGING=true
+else
+    CHARGING=false
 fi
 
-case "${PERCENTAGE}" in
-  9[0-9]|100) ICON=""
-  ;;
-  [6-8][0-9]) ICON=""
-  ;;
-  [3-5][0-9]) ICON=""
-  ;;
-  [1-2][0-9]) ICON=""
-  ;;
-  *) ICON=""
-esac
+# Set battery level
+BATTERY_LEVEL=$BATTERY_INFO
 
-if [[ "$CHARGING" != "" ]]; then
-  ICON=""
+# Determine icon and color based on battery level and charging status
+if [[ $CHARGING == true ]]; then
+    ICON="󰂄"  # Charging icon
+    COLOR=$WHITE
+else
+    if [[ $BATTERY_LEVEL -gt 75 ]]; then
+        ICON="󰁹"  # Full battery
+        COLOR=$WHITE
+    elif [[ $BATTERY_LEVEL -gt 50 ]]; then
+        ICON="󰁾"  # Three quarters
+        COLOR=$WHITE
+    elif [[ $BATTERY_LEVEL -gt 25 ]]; then
+        ICON="󰁼"  # Half battery
+        COLOR=$WHITE
+    elif [[ $BATTERY_LEVEL -gt 10 ]]; then
+        ICON="󰁻"  # Quarter battery
+        COLOR=$WHITE
+    else
+        ICON="󰁺"  # Empty battery
+        COLOR=$WHITE
+    fi
 fi
 
-# The item invoking this script (name $NAME) will get its icon and label
-# updated with the current battery status
-sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%"
+# Update the battery item
+sketchybar --set "$NAME" icon="$ICON" \
+                        icon.color="$COLOR" \
+                        icon.font="SF Pro:Semibold:15.0" \
+                        icon.y_offset=1 \
+                        label="$BATTERY_LEVEL%" \
+                        label.color=$WHITE \
+                        label.font="Fira Sans:Medium:12.0" \
+                        label.y_offset=1
