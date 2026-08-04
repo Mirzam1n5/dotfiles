@@ -1,10 +1,13 @@
-# dotfiles
+<div align="center">
+  
+  <h1>dotfiles</h1>
+  
+  <i>Personal macOS configuration managed with Nix and Home Manager.</i>
+</div>
 
 <p align="center">
     <img src="preview.JPG" width="900">
 </p>
-
-Personal macOS configuration managed with Nix and Home Manager.
 
 ## Structure
 
