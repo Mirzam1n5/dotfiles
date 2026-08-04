@@ -1,54 +1,34 @@
 #!/usr/bin/env bash
 
-# =============================================================================
-# Yabai Основные Настройки (Глобальные)
-# =============================================================================
-
-# Включаем режим автоматического тайлинга (bsp - это сетка, как в Linux)
 yabai -m config layout                       bsp
 
-# Настройки отображения окон
 yabai -m config window_opacity               off
 yabai -m config window_shadow                on
 
-# Фиксы для встроенных анимаций macOS
 yabai -m config window_animation_duration    0.0
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
 
-# =============================================================================
-# Геометрия Окон (Твои любимые отступы с image.png!)
-# =============================================================================
 
-# Закругление углов окон (работает идеально на macOS 13+)
 yabai -m config window_topmost               on
 
-# Отступы между окнами (inner) и от краев экрана (outer)
 yabai -m config top_padding                  50
 yabai -m config bottom_padding               20
 yabai -m config left_padding                 30
 yabai -m config right_padding                30
 yabai -m config window_gap                   25
 
-# Мышка: фокус следует за курсором (lazy режим)
 yabai -m config focus_follows_mouse          lazy
 yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 
-# =============================================================================
-# Правила для приложений (Исключения из тайлинга)
-# =============================================================================
 
-# Чтобы Настройки, Системные окна и Калькулятор не растягивались на пол-экрана
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add subrole="^AXFlexibleWindow$" manage=off
 
-# =============================================================================
-# Сигналы для SketchyBar (Чтобы панелька знала, когда меняются окна)
-# =============================================================================
 yabai -m signal --add event=window_focused action="sketchybar --trigger update_windows"
 yabai -m signal --add event=window_created action="sketchybar --trigger update_windows"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger update_windows"
