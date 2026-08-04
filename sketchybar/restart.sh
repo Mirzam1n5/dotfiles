@@ -9,11 +9,4 @@ sleep 1
 # Start sketchybar with new configuration
 sketchybar --config "$HOME/.config/sketchybar/sketchybarrc"
 
-echo "SketchyBar restarted with new aesthetic configuration!"
-echo "✨ Features included:"
-echo "  • Modern Catppuccin color scheme"
-echo "  • Beautiful aerospace workspace tiles"
-echo "  • Active workspace highlighting"
-echo "  • Enhanced battery, volume, and weather widgets"
-echo "  • Smooth animations and transitions"
-echo "  • Clean, minimal design" 
+echo "SketchyBar restarted — minimal clock-only bar"

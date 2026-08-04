@@ -1,5 +1,9 @@
 # dotfiles
 
+<p align="center">
+    <img src="preview.JPG" width="900">
+</p>
+
 Personal macOS configuration managed with Nix and Home Manager.
 
 ## Structure
